@@ -1,14 +1,10 @@
-class Letter
-
-	def initialize(str)
-		@array = []
-		str.gsub!(/[, ]/, " ")
-		str = str.split(" ")
-		str.each {|el| @array << el.to_i }
-	end 
-	
+class HashCount
+	def initialize(arr)
+		@array = arr
+	end 	
 	def hashCount
-		@array.sort!
+		array = convert(@array)
+		array.sort!
 		hash = {}
 		count = 1
 		@array.each_index do |i|
@@ -19,21 +15,15 @@ class Letter
 				count = 1
 			end 
 		end 
-		puts hash
+		hash
 	end
-
+	private
+	 	def convert(arr)
+	 		new_array = []
+			arr.each {|el| new_array << el.to_i }
+			new_array
+	 	end 
 end
 
-puts "Hi!"
-while (true)
-	puts "Enter your array, please.."
-	puts "or enter e to exit"
-	str = gets.chomp
-	if str != 'e'
-		letter = Letter.new(str)
-		puts "The hash in result is "
-		puts letter.hashCount
-	else
-		break
-	end
-end 
+a = HashCount.new([1, 2, 3])
+a.hashCount
